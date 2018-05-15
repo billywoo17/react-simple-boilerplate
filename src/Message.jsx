@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import MessageList from './MessageList.jsx';
 class Message extends Component {
   render() {
     return (
-      <main className="messages">
-      <MessageList />
-      <div className="message system">
-        Anonymous1 changed their name to nomnom.
+        <div className="message">
+        <span className="message-username">Anonymous1</span>
+        <span className="message-content">I won't be impressed with technology until I can download food.</span>
       </div>
-      </main>
     );
   }
 }
