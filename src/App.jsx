@@ -18,12 +18,11 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001');
 
     //listen for messages
-    this.socket.onmessage = function (event) {
+    this.socket.addEventListener('message', (messageEvent) => {
       const newMessage = (JSON.parse(event.data));
-      console.log(newMessage);
-      const message = this.state.messages.concat(newMessage);
-      this.setState({messages: message});
-    };
+      const messages = this.state.messages.concat(newMessage);
+      this.setState({messages: messages});
+    });
   }
 
   //send message and username to server
