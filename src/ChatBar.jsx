@@ -4,6 +4,7 @@ class App extends Component {
   super(props);
   this.state = {inputValue:""};
   this.onChange = this.onChange.bind(this);
+  this.myUsername = this.myUsername.bind(this);
   }
   changeValue(inputValue) {
     this.setState({ inputValue });
@@ -16,13 +17,17 @@ class App extends Component {
     } else {
       this.changeValue(event.target.value);
     }
-  };
+  }
+
+  myUsername(event){
+    this.props.myUsername(event.target.value);
+  }
   render() {
 
 
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" value= {this.props.currentUser} />
+        <input className="chatbar-username" onChange={this.myUsername} placeholder="Anonymous" />
         <input  onKeyPress={this.onChange} className="chatbar-message" placeholder="Type a message and hit ENTER" />
       </footer>
     );

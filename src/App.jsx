@@ -6,8 +6,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.onEnter = this.onEnter.bind(this);
+    this.myUsername = this.myUsername.bind(this);
     this.state = {
-      currentUser: {name: "Bob"},
+      currentUser: {name: "Anonymous"},
       messages: []
     };
   }
@@ -30,6 +31,10 @@ class App extends Component {
     this.socket.send(JSON.stringify({message: myMessage, username:this.state.currentUser.name}));
   }
 
+  myUsername(username){
+    this.setState({currentUser: {name:username}});
+  }
+
   render() {
     return (
       <div>
@@ -37,7 +42,7 @@ class App extends Component {
         <a href="/" className="navbar-brand">Chatty</a>
       </nav>
       <MessageList messages={this.state.messages} />
-      <ChatBar currentUser= {this.state.currentUser.name} onEnter={this.onEnter}/>
+      <ChatBar myUsername = {this.myUsername} currentUser= {this.state.currentUser.name} onEnter={this.onEnter}/>
       </div>
     );
   }
