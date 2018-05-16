@@ -9,7 +9,8 @@ class App extends Component {
     this.myUsername = this.myUsername.bind(this);
     this.state = {
       currentUser: {name: "Anonymous"},
-      messages: []
+      oldUser:{name:""},
+      messages: [],
     };
   }
   componentDidMount() {
@@ -32,7 +33,9 @@ class App extends Component {
   }
 
   myUsername(username){
+    this.setState({oldUser:{name:this.state.currentUser.name}});
     this.setState({currentUser: {name:username}});
+    console.log(this.state.oldUser.name, this.state.currentUser.name);
   }
 
   render() {

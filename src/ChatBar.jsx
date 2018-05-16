@@ -20,14 +20,16 @@ class App extends Component {
   }
 
   myUsername(event){
-    this.props.myUsername(event.target.value);
+    if(event.key == 'Enter'){
+      this.props.myUsername(event.target.value);
+    }
   }
   render() {
 
 
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" onChange={this.myUsername} placeholder="Anonymous" />
+        <input className="chatbar-username" onKeyPress={this.myUsername} placeholder="Anonymous" />
         <input  onKeyPress={this.onChange} className="chatbar-message" placeholder="Type a message and hit ENTER" />
       </footer>
     );
