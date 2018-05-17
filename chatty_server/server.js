@@ -1,5 +1,4 @@
 // server.js
-
 const express = require('express');
 const WebSocket = require('ws');
 const uuidv1 = require('uuid/v1');

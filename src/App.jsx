@@ -24,22 +24,37 @@ class App extends Component {
       const newMessage = (JSON.parse(event.data));
       switch(newMessage.messageType){
         case "userCount":
-          this.setState({userCount: newMessage.usercount});
+          this.setState({
+            userCount: newMessage.usercount
+          });
         break;
         default:
-          const messages = this.state.messages.concat(newMessage);
-          this.setState({messages: messages});
+          this.setState({
+            messages: this.state.messages.concat(newMessage)
+          });
       }
     });
   }
 
   //send message and username to server
   onEnter(myMessage){
-    this.socket.send(JSON.stringify({message: myMessage, username:this.state.currentUser.name, messageType:"message"}));
+    this.socket.send(
+      JSON.stringify({
+        message: myMessage,
+        username:this.state.currentUser.name,
+        messageType:"message"
+      })
+    );
   }
 
   myUsername(username){
-    this.socket.send(JSON.stringify({oldname: this.state.currentUser.name, username:username, messageType:"notification"}));
+    this.socket.send(
+      JSON.stringify({
+        oldname: this.state.currentUser.name,
+        username:username,
+        messageType:"notification"
+      })
+    );
     this.setState({currentUser: {name: username}});
   }
 
