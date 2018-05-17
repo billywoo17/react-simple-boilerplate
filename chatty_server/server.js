@@ -25,11 +25,20 @@ wss.on('connection', (ws) => {
   //read message
    ws.on('message', function incoming(message) {
     const myMessage = JSON.parse(message);
-    const messageObject = {
-      id: getId(),
-      username: myMessage.username,
-      content: myMessage.message,
-    };
+    let messageObject = {};
+    if(myMessage.messageType === "message"){
+      messageObject = {
+        id: getId(),
+        username: myMessage.username,
+        content: myMessage.message,
+      };
+    } else{
+      messageObject = {
+        id: getId(),
+        oldname: myMessage.oldname,
+        name: myMessage.username,
+      };
+    }
     wss.broadcast(messageObject);
   });
 

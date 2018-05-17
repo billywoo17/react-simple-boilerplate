@@ -9,7 +9,6 @@ class App extends Component {
     this.myUsername = this.myUsername.bind(this);
     this.state = {
       currentUser: {name: "Anonymous"},
-      oldUser:{name:""},
       messages: [],
     };
   }
@@ -21,6 +20,7 @@ class App extends Component {
 
     //listen for messages
     this.socket.addEventListener('message', (messageEvent) => {
+      console.log(messageEvent);
       const newMessage = (JSON.parse(event.data));
       const messages = this.state.messages.concat(newMessage);
       this.setState({messages: messages});
@@ -29,13 +29,12 @@ class App extends Component {
 
   //send message and username to server
   onEnter(myMessage){
-    this.socket.send(JSON.stringify({message: myMessage, username:this.state.currentUser.name}));
+    this.socket.send(JSON.stringify({message: myMessage, username:this.state.currentUser.name, messageType:"message"}));
   }
 
   myUsername(username){
-    this.setState({oldUser:{name:this.state.currentUser.name}});
-    this.setState({currentUser: {name:username}});
-    console.log(this.state.oldUser.name, this.state.currentUser.name);
+    this.socket.send(JSON.stringify({oldname: this.state.currentUser.name, username:username, messageType:"notification"}));
+    this.setState({currentUser: {name: username}});
   }
 
   render() {
