@@ -3,6 +3,7 @@ class Message extends Component {
   constructor(props) {
     super(props);
   }
+  //checking if extension is image file
  checkImage(link){
     const extension =  /(?:\.([^.]+))?$/.exec(link)[1];
     const supported = {
@@ -17,11 +18,11 @@ class Message extends Component {
 
     return (
       <div className="message">
-        <span className="message-username">{this.props.eachMessage.username}</span>
+        <div><span className="message-username">{this.props.eachMessage.username}</span></div>
         {!this.checkImage(this.props.eachMessage.content) &&
           <span className="message-content">{this.props.eachMessage.content}</span>}
         {this.checkImage(this.props.eachMessage.content) &&
-          <img className="message-image" src= {this.props.eachMessage.content}/>}
+          <div><img className="message-image"  src= {this.props.eachMessage.content}/></div>}
       </div>
       );
   }
