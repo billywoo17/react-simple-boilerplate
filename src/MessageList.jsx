@@ -5,23 +5,23 @@ class MessageList extends Component {
     super(props);
   }
   render() {
-  const message = this.props.messages.map(array => {
-    return (
-      <div className="message" key={array.id}>
-        <span className="message-username" >{array.username}</span>
-        <span className="message-content">{array.content}</span>
-      </div>);
-  });
+    const message = this.props.messages.map(eachMessage => {
+      switch(eachMessage.messageType){
+        case "message" :
+          return (<Message key={eachMessage.id}eachMessage ={eachMessage} />)
+        break;
+        case "notification":
+          return(<div className="message system" key={eachMessage.id}>
+          {eachMessage.oldname} changed their name to {eachMessage.username}.
+        </div>)
+        break;
+      }
+    });
 
     return (
       <main className="messages">
-      <Message />
       {message}
-      <div className="message system">
-        Anonymous1 changed their name to nomnom.
-      </div>
       </main>
-
     );
   }
 }

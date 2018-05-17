@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       currentUser: {name: "Anonymous"},
       messages: [],
+      userCount: "",
     };
   }
   componentDidMount() {
@@ -20,10 +21,15 @@ class App extends Component {
 
     //listen for messages
     this.socket.addEventListener('message', (messageEvent) => {
-      console.log(messageEvent);
       const newMessage = (JSON.parse(event.data));
-      const messages = this.state.messages.concat(newMessage);
-      this.setState({messages: messages});
+      switch(newMessage.messageType){
+        case "userCount":
+          this.setState({userCount: newMessage.usercount});
+        break;
+        default:
+          const messages = this.state.messages.concat(newMessage);
+          this.setState({messages: messages});
+      }
     });
   }
 
@@ -42,6 +48,7 @@ class App extends Component {
       <div>
       <nav className="navbar">
         <a href="/" className="navbar-brand">Chatty</a>
+        <a className="nav-bar-userCount">{this.state.userCount} users online</a>
       </nav>
       <MessageList messages={this.state.messages} />
       <ChatBar myUsername = {this.myUsername} currentUser= {this.state.currentUser.name} onEnter={this.onEnter}/>
