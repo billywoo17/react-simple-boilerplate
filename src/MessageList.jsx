@@ -7,10 +7,10 @@ class MessageList extends Component {
   render() {
     const message = this.props.messages.map(eachMessage => {
       switch(eachMessage.messageType){
-        case "message" :
+        case 'message' :
           return (<Message key={eachMessage.id}eachMessage ={eachMessage} />)
         break;
-        case "notification":
+        case 'notification':
           return(<div className="message system" key={eachMessage.id}>
           {eachMessage.oldname} changed their name to {eachMessage.username}.
         </div>)
@@ -25,4 +25,4 @@ class MessageList extends Component {
     );
   }
 }
-export default MessageList;hi
+export default MessageList;
