@@ -24,10 +24,10 @@ let usercount = 0;
 wss.on('connection', (ws) => {
   console.log('Client connected');
   usercount += 1;
+
   //read message
    ws.on('message', function incoming(message) {
     const myMessage = JSON.parse(message);
-    console.log(myMessage);
     let messageObject = {};
     switch(myMessage.messageType){
       case "message" :
@@ -56,16 +56,12 @@ wss.on('connection', (ws) => {
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
     usercount -= 1;
-    wss.broadcast({
-      usercount:usercount,
-      messageType: "userCount",
-    });
+    wss.broadcast(userCount(usercount));
     console.log('Client disconnected');
   });
-  wss.broadcast({
-    usercount:usercount,
-    messageType: "userCount",
-  });
+
+  //
+  wss.broadcast(userCount(usercount));
 });
 
 // function for boardcast to all clients
@@ -76,3 +72,7 @@ wss.broadcast = function broadcast(data) {
     }
   });
 };
+
+function userCount(usercount){
+  return  {usercount:usercount, messageType: "userCount",};
+}
