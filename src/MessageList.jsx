@@ -11,7 +11,7 @@ class MessageList extends Component {
           return (<Message key={eachMessage.id}eachMessage ={eachMessage} />)
         break;
         case 'notification':
-          return(<div className="message system" key={eachMessage.id}>
+          return (<div className="message system" key={eachMessage.id}>
           {eachMessage.oldname} changed their name to {eachMessage.username}.
         </div>)
         break;

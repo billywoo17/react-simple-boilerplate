@@ -46,7 +46,7 @@ class App extends Component {
       })
     );
   }
-
+  //sends name change information to server
   myUsername(username){
     this.socket.send(
       JSON.stringify({

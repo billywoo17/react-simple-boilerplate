@@ -15,10 +15,12 @@ class Message extends Component {
   }
 
   render(){
-
+    var divStyle = {
+      color: this.props.eachMessage.messageColor,
+    }
     return (
       <div className="message">
-        <div><span className="message-username">{this.props.eachMessage.username}</span></div>
+        <div><span style style={divStyle} className="message-username">{this.props.eachMessage.username}</span></div>
         {!this.checkImage(this.props.eachMessage.content) &&
           <span className="message-content">{this.props.eachMessage.content}</span>}
         {this.checkImage(this.props.eachMessage.content) &&
