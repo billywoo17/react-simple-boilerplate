@@ -2,7 +2,7 @@
 
 const express = require('express');
 const WebSocket = require('ws');
-
+const uuidv1 = require('uuid/v1');
 
 // Set the port to 3001
 const PORT = 3001;
@@ -32,7 +32,7 @@ wss.on('connection', (ws) => {
     switch(myMessage.messageType){
       case "message" :
       messageObject = {
-        id: getId(),
+        id: uuidv1(),
         username: myMessage.username,
         content: myMessage.message,
         messageType: myMessage.messageType,
@@ -40,7 +40,7 @@ wss.on('connection', (ws) => {
       break;
       case "notification":
       messageObject = {
-        id: getId(),
+        id: uuidv1(),
         oldname: myMessage.oldname,
         username: myMessage.username,
         messageType: myMessage.messageType,
@@ -67,13 +67,6 @@ wss.on('connection', (ws) => {
     messageType: "userCount",
   });
 });
-
-//generate and Id for each message send to us
-let id = 1;
-const getId = () => {
-  id = id + 1;
-  return id;
-};
 
 // function for boardcast to all clients
 wss.broadcast = function broadcast(data) {
