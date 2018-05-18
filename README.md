@@ -25,7 +25,7 @@ npm start
 * [babel-loader](https://github.com/babel/babel-loader)
 * [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
 
-##Final Product
+## Final Product
 !["Screenshot of Landing Page"](https://raw.githubusercontent.com/billywoo17/react-simple-boilerplate/master/screenshots/Screenshot%20from%202018-05-17%2017-46-22.png)
 Screenshot of Landing Page
 
